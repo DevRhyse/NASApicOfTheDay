@@ -5,6 +5,7 @@
 /* Box Model Hack */
 *{
   box-sizing: border-box;
+  color: blue;
 }
 
 /******************************************
@@ -19,3 +20,10 @@ img{
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+main{
+  background: url("../img/apollo8earthrise.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50em;
+  width: 100%;
+}
