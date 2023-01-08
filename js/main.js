@@ -1,6 +1,6 @@
 //The user will enter a date. Use that date to get the NASA picture of the day from that date! https://api.nasa.gov/
 
-
+const videoInject = document.querySelector("iframe")
 const imgInject = document.getElementById("setImage")
 const titleInject = document.querySelector("h2")
 const descriptionInject = document.querySelector("h3")
@@ -29,11 +29,21 @@ async function getAPIresponse(file){
     let gatheredHDurl = APIresult.hdurl
     let gatheredTitle = APIresult.title
     let gatheredExplanation = APIresult.explanation
-    placeGatheredObject(gatheredExplanation, gatheredURL, gatheredTitle, gatheredHDurl)
+    let gatheredMediaType = APIresult.media_type
+    console.log(gatheredMediaType)
+    placeGatheredObject(gatheredMediaType, gatheredExplanation, gatheredURL, gatheredTitle, gatheredHDurl)
 }
 
-async function placeGatheredObject(explanation, url, title, HDurl){
-        if(!HDurl){
+async function placeGatheredObject(media, explanation, url, title, HDurl){
+        if(media === 'video'){
+            videoInject.classList.toggle('hidden')
+            videoInject.src = url
+            videoInject.height = 340
+            videoInject.width = 420
+            videoInject.autoplay = false;
+            videoInject.controls = true;
+            videoInject.muted = false;
+        }else if(!HDurl){
             imgInject.src = url
         }else{
             imgInject.src = HDurl
@@ -41,9 +51,3 @@ async function placeGatheredObject(explanation, url, title, HDurl){
         titleInject.innerHTML = `${title}`
         descriptionInject.innerHTML = `${explanation}`    
 }
-    
-
-
-// API key
-// KZUlGfcKcccqlNoabQkZQ1lTH3fKCvdcawRL4MoC
-// Account ID: 6ca12a01-f673-47c9-a5a2-7cbc24dac370
